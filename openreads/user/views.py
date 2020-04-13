@@ -34,6 +34,6 @@ def logout(request):
         LogoutView.as_view(template_name='main/home.html')(request)
     return HttpResponseRedirect('/')
 
-def view_profile(request, user_id):
-    
+def view_profile(request):
+
     return render(request, 'user/profile.html', {})

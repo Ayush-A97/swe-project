@@ -10,15 +10,35 @@
 <br>
 
 <div class='container-fluid'>
-  <h2> Recommended books </h2>
   <form class="form input-group input-group-lg mb-3 p-4" action="{% url 'main:search' %}" method="get" >
     <input type="text" class="form-control" placeholder="Search Books" aria-label="Search" name="searchword">
     <div class="input-group-append">
       <button class="btn btn-outline-info" type="submit" >Search</button>
     </div>
   </form>
-  <div id='recomm' class ="shadow rounded bg-light container-fluid" style="padding: 20px;">
+  {% if user.is_authenticated %}
+  <h2> My bookshelves </h2>
+  {% for shelf in shelves %}
+  <h3>{{ shelf.name}} </h3>
+  <div id='recomm' class ="row shadow rounded bg-light container-fluid" style="padding: 20px;">
+    <div class="col-5 card-group container-fluid">
+
+      {% for book in shelf.book_set.all %}
+        <div class="card bg-light shadow">
+
+        <div class="card-header bg-dark"></div>
+        <div class="card-body bg-light">
+
+        <img class="card-img-top" src="{{ book.cover }}" alt="" style="width:200px;">
+        <h4 >{{ book.title }}</h4>
+        <h5> {{ book.author }} </h5>
+        </div>
+        </div>
+        {% endfor %}
+      </div>
     </div>
   </div>
-</div>
+  {% endfor %}
+  </div>
+  {% endif %}
 {% endblock %}

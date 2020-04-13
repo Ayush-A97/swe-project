@@ -7,7 +7,7 @@ from group.models import Group
 
 class User(AbstractUser):
     lib = models.OneToOneField(Library, on_delete = models.CASCADE, null=True)
-    groups = models.ManyToManyField(Group)
+    groups = models.ManyToManyField(Group, blank=True)
 
 class UserForm(forms.ModelForm):
     confirm_password = forms.CharField(max_length=120)
